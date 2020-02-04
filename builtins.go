@@ -233,6 +233,10 @@ func regex(v interface{}, param string) error {
 		s = fmt.Sprintf("%v", reflect.Indirect(reflect.ValueOf(v)).Interface())
 	}
 
+	// Validate optional params as matching
+	if s == "" {
+		return nil
+	}
 	re, err := regexp.Compile(param)
 	if err != nil {
 		return ErrBadParameter
