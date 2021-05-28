@@ -308,11 +308,11 @@ func (mv *Validator) validateField(fieldDef reflect.StructField, fieldVal reflec
 
 	// no-op if field is not a struct, interface, array, slice or map
 	mv.deepValidateCollection(fieldVal, m, func() string {
-		return fieldDef.Name
+		return fieldDef.Tag.Get("json")
 	})
 
 	if len(errs) > 0 {
-		n := fieldDef.Name
+		n := fieldDef.Tag.Get("json")
 
 		if mv.printJSON {
 			if jn := parseName(fieldDef.Tag.Get("json")); jn != "" {
